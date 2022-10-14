@@ -1,11 +1,10 @@
-import * as React from "react";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
-import Typography from "@mui/material/Typography"; 
-import { useLocation, useNavigate } from "react-router-dom";
+import Typography from "@mui/material/Typography";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 // import { PersonalContext } from '../contexts/PersonalContext';
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
@@ -17,50 +16,66 @@ import axios from "axios";
 import { AuthContext } from "../contexts/AuthContext";
 import { toastSuccessNotify } from "../helper/ToastNotify";
 import { Container } from "@mui/material";
+import { useContext, useState } from "react";
 
-export default function PersonalCreate() {
+export default function PersonalUpdate() {
+  const { userId } = useParams();
+  console.log(userId);
   const navigate = useNavigate();
-  const { myKey } = React.useContext(AuthContext);
+  const { myKey } = useContext(AuthContext);
   const location = useLocation();
-  const { departmentId } = location.state;
-  const [firstName, setFirstName] = React.useState("");
-  const [lastName, setLastName] = React.useState("");
-  const [isStaffed, setIsStaffed] = React.useState(false);
-  const [title, setTitle] = React.useState("Junior");
-  const [gender, setGender] = React.useState("Male");
-  const [salary, setSalary] = React.useState(1250);
+  //   const { departmentId } = location.state;
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [isStaffed, setIsStaffed] = useState(false);
+  const [title, setTitle] = useState("Junior");
+  const [gender, setGender] = useState("Male");
+  const [salary, setSalary] = useState(1250);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    // let headersList = {
+    //   Accept: "*/*",
+    //   Authorization: `Token ${myKey}`,
+    //   "Content-Type": "application/json",
+    // };
     let headersList = {
       Accept: "*/*",
-      Authorization: `Token ${myKey}`,
-      "Content-Type": "application/json",
+      Authorization: "Token 902fa0fbbecd501d1c7ba3efd570362b40388797",
     };
 
-    let bodyContent = JSON.stringify({
-      first_name: firstName,
-      last_name: lastName,
-      is_staffed: isStaffed,
-      title: title,
-      gender: gender,
-      salary: salary,
-      department: departmentId,
-    });
-
     let reqOptions = {
-      url: "http://127.0.0.1:8000/api/personal/",
-      method: "POST",
+      url: "http://127.0.0.1:8000/api/personal/8/",
+      method: "GET",
       headers: headersList,
-      data: bodyContent,
     };
 
     let response = await axios.request(reqOptions);
-    if (response.status === 201) {
-      toastSuccessNotify("Personel başarıyla kaydedildi!");
-      navigate(-1);
-    }
     console.log(response.data);
+
+    // let bodyContent = JSON.stringify({
+    //   first_name: firstName,
+    //   last_name: lastName,
+    //   is_staffed: isStaffed,
+    //   title: title,
+    //   gender: gender,
+    //   salary: salary,
+    //   department: departmentId,
+    // });
+
+    // let reqOptions = {
+    //   url: "http://127.0.0.1:8000/api/personal/",
+    //   method: "POST",
+    //   headers: headersList,
+    //   data: bodyContent,
+    // };
+
+    // let response = await axios.request(reqOptions);
+    // if (response.status === 201) {
+    //   toastSuccessNotify("Personel başarıyla kaydedildi!");
+    //   navigate(-1);
+    // }
+    // console.log(response.data);
   };
 
   return (
@@ -77,7 +92,7 @@ export default function PersonalCreate() {
           boxShadow: 5,
         }}
       >
-        PersonalCreate
+        PersonalUpdate
       </Typography>
 
       <Grid

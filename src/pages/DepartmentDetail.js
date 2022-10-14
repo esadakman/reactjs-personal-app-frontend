@@ -41,6 +41,7 @@ function createData(
 
 export default function DeparmentDetail() {
   const { str } = useParams();
+  console.log(str)
   const { myKey } = React.useContext(AuthContext);
   const isStaff = sessionStorage.getItem("is_staff") || false;
   const [data, setData] = React.useState();
@@ -74,7 +75,7 @@ export default function DeparmentDetail() {
   };
   React.useEffect(() => {
     getDepartments();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleDelete = async (id) => {
@@ -95,8 +96,13 @@ export default function DeparmentDetail() {
     navigate("/create-personal", { state: { departmentId } });
   };
 
+  const handleUpdate = (deparment) => {
+    navigate(`/update-personal/${deparment}`);
+    console.log(deparment);
+  };
+
   return (
-    <Container>
+    <Container maxWidth="md">
       <Typography
         component="h1"
         variant="h4"
@@ -105,7 +111,7 @@ export default function DeparmentDetail() {
           bgcolor: "white",
           borderRadius: "1rem",
           padding: "1rem",
-          m: "1rem",
+          my: "1rem",
           width: "auto",
           boxShadow: 5,
         }}
@@ -156,14 +162,22 @@ export default function DeparmentDetail() {
                         sx={{ cursor: "pointer" }}
                         onClick={handleEdit}
                       >
-                        <EditIcon />
+                        <Button
+                          color="primary"
+                          sx={{ minWidth: "0" }}
+                          onClick={() => handleUpdate(row.id)}
+                        >
+                          <EditIcon />
+                        </Button>
                       </TableCell>
-                      <TableCell
-                        align="center"
-                        sx={{ cursor: "pointer" }}
-                        onClick={() => handleDelete(row.id)}
-                      >
-                        <DeleteIcon />
+                      <TableCell align="center" sx={{ cursor: "pointer" }}>
+                        <Button
+                          color="error"
+                          sx={{ minWidth: "0" }}
+                          onClick={() => handleClick(row.name)}
+                        >
+                          <DeleteIcon />
+                        </Button>
                       </TableCell>
                     </>
                   )}

@@ -7,6 +7,7 @@ import NavBar from '../components/Navbar'
 import DeparmentDetail from '../pages/DepartmentDetail'
 import PersonalCreate from '../pages/PersonalCreate'
 import PrivateRouter from './PrivateRouter'
+import PersonalUpdate from '../pages/PersonalUpdate'
 
 const AppRouter = () => {
 
@@ -24,6 +25,9 @@ const AppRouter = () => {
               </Route>
               <Route path="/create-personal" element={<PrivateRouter/>}>
                 <Route path="" element={<PersonalCreate/>} />
+              </Route>
+              <Route path="/update-personal/:userId" element={<PrivateRouter/>}>
+                <Route path="" element={<PersonalUpdate/>} />
               </Route>
           </Routes>
       </Router>

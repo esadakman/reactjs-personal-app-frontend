@@ -42,8 +42,8 @@ export default function DepartmentTable() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [myKey]);
 
-  const handleClick = (deparment) => {
-    navigate(`/detail/${deparment}`);
+  const handleClick = (userId) => {
+    navigate(`/detail/${userId}`);
   };
 
   return (
