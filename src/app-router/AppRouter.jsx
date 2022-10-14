@@ -4,8 +4,8 @@ import Login from '../pages/Login'
 import Register from '../pages/Register'
 import Home from '../pages/Home'
 import NavBar from '../components/Navbar'
-import DeparmentDetail from '../pages/DeparmentDetail'
-import PersonalCreate from '../pages/PersonalCreate'
+import PersonalCreate from '../pages/PersonalCreate' 
+import DepartmentDetail from '../pages/DepartmentDetail'
 
 const AppRouter = () => {
 
@@ -15,8 +15,8 @@ const AppRouter = () => {
           <Routes>
               <Route path="/" element={<Login/>} />
               <Route path="/home" element={<Home/>} />
-              <Route path="" element={<Register/>} />
-              <Route path="" element={<DeparmentDetail/>} />
+              <Route path="/register" element={<Register/>} />
+              <Route path="" element={<DepartmentDetail/>} />
               <Route path="" element={<PersonalCreate/>} />
           </Routes>
       </Router>
