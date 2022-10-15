@@ -131,7 +131,7 @@ export default function DeparmentDetail() {
               <TableCell align="center">Last Name</TableCell>
               <TableCell align="center">Gender</TableCell>
               <TableCell align="center">Salary</TableCell>
-              <TableCell align="center">Is Staffed?</TableCell>
+              {/* <TableCell align="center">Is Staffed?</TableCell> */}
               {isStaff !== "false" && (
                 <>
                   <TableCell align="center">Edit</TableCell>
@@ -154,9 +154,9 @@ export default function DeparmentDetail() {
                   <TableCell align="center">{row.last_name}</TableCell>
                   <TableCell align="center">{row.gender}</TableCell>
                   <TableCell align="center">{row.salary} $</TableCell>
-                  <TableCell align="center">
+                  {/* <TableCell align="center">
                     {row.is_staffed ? "✅" : "❌"}
-                  </TableCell>
+                  </TableCell> */}
                   {isStaff !== "false" && (
                     <>
                       <TableCell

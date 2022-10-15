@@ -9,12 +9,12 @@ import { useLocation, useNavigate, useParams } from "react-router-dom";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
-import FormControl from "@mui/material/FormControl"; 
+import FormControl from "@mui/material/FormControl";
 import axios from "axios";
 import { AuthContext } from "../contexts/AuthContext";
 import { toastErrorNotify, toastSuccessNotify } from "../helper/ToastNotify";
 import { Container } from "@mui/material";
-import { useContext,   useState } from "react";
+import { useContext, useState } from "react";
 
 export default function PersonalUpdate() {
   const navigate = useNavigate();
@@ -46,7 +46,7 @@ export default function PersonalUpdate() {
         gender: gender,
         salary: salary,
       });
-  
+
       let reqOptions = {
         url: `http://127.0.0.1:8000/api/personal/${userId}/`,
         method: "PUT",
@@ -54,17 +54,22 @@ export default function PersonalUpdate() {
         data: bodyContent,
       };
       console.log(reqOptions);
-  
+
       let response = await axios.request(reqOptions);
       if (response.status === 200) {
         toastSuccessNotify("Personal succesfully updated!");
         navigate(-1);
       }
+      toastSuccessNotify("Personal succesfully updated!");
+      navigate(-1);
     } catch (error) {
-      toastErrorNotify("You need access to perform this action");
+      if (error.response.request.status === 401) {
+        toastErrorNotify("You need access to perform this action");
+      } else {
+        console.log(error);
+      }
     }
   };
-  console.log(isStaffed);
   return (
     <Container maxWidth="sm">
       <Typography

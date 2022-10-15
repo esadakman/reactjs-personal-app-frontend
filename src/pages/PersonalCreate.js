@@ -15,7 +15,7 @@ import Checkbox from "@mui/material/Checkbox";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import axios from "axios";
 import { AuthContext } from "../contexts/AuthContext";
-import { toastErrorNotify,toastSuccessNotify } from "../helper/ToastNotify";
+import { toastErrorNotify, toastSuccessNotify } from "../helper/ToastNotify";
 import { Container } from "@mui/material";
 
 export default function PersonalCreate() {
@@ -42,7 +42,7 @@ export default function PersonalCreate() {
       let bodyContent = JSON.stringify({
         first_name: firstName,
         last_name: lastName,
-        is_staffed: isStaffed,
+        // is_staffed: isStaffed,
         title: title,
         gender: gender,
         salary: salary,
@@ -64,7 +64,11 @@ export default function PersonalCreate() {
       }
       console.log(response.data);
     } catch (error) {
-      toastErrorNotify("You need access to perform this action");
+      if (error.response.request.status === 401) {
+        toastErrorNotify("You need access to perform this action");
+      } else {
+        console.log(error);
+      }
     }
   };
 
@@ -144,13 +148,13 @@ export default function PersonalCreate() {
                 onChange={(e) => setLastName(e.target.value)}
                 required
               />
-              <FormControlLabel
+              {/* <FormControlLabel
                 // fullWidth
                 name="is_staff"
                 control={<Checkbox />}
                 onChange={(e) => setIsStaffed(e.target.value)}
                 label="Is Staffed?"
-              />
+              /> */}
               <FormControl fullWidth>
                 <InputLabel id="gender-select-label">Gender</InputLabel>
                 <Select
