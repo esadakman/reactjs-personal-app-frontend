@@ -132,7 +132,7 @@ export default function DeparmentDetail() {
               <TableCell align="center">Gender</TableCell>
               <TableCell align="center">Salary</TableCell>
               {/* <TableCell align="center">Is Staffed?</TableCell> */}
-              {isStaff !== "false" && (
+              {isStaff === "true" && (
                 <>
                   <TableCell align="center">Edit</TableCell>
                   <TableCell align="center">Delete</TableCell>
@@ -157,7 +157,7 @@ export default function DeparmentDetail() {
                   {/* <TableCell align="center">
                     {row.is_staffed ? "✅" : "❌"}
                   </TableCell> */}
-                  {isStaff !== "false" && (
+                  {isStaff === "true" && (
                     <>
                       <TableCell
                         align="center"
@@ -190,7 +190,7 @@ export default function DeparmentDetail() {
         </Table>
       </TableContainer>
       <div style={{display:'flex',justifyContent:'space-between',marginTop:'1rem' }}>
-        {isStaff !== "false" && (
+        {isStaff === "true" && (
           <Button onClick={handleClick} variant="contained" >
             Add Personal
           </Button>
@@ -201,7 +201,7 @@ export default function DeparmentDetail() {
           onClick={() => navigate("/home")}
           color="error"
         >
-          Back
+          Go Back
         </Button>
       </div>
     </Container>

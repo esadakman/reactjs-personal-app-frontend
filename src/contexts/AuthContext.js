@@ -79,13 +79,13 @@ const AuthContextProvider = (props) => {
     try {
       var config = {
         method: "post",
-        url: "https://esadd26.pythonanywhere.com/users/auth/logouts/",
+        url: `${url}users/auth/logouts/`, 
         headers: {
           Authorization: `Token ${myKey}`,
         },
       };
       const res = await axios(config);
-      console.log(res);
+      // console.log(res);
       if (res.status === 200) {
         setCurrentUser(false);
         setMyKey(false);
@@ -104,6 +104,7 @@ const AuthContextProvider = (props) => {
     myKey,
     signIn,
     logOut,
+    url,
   };
 
   return (

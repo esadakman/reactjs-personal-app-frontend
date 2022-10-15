@@ -21,7 +21,7 @@ export default function PersonalUpdate() {
   const location = useLocation();
   const { userData } = location.state;
   const { userId } = useParams();
-  const { myKey } = useContext(AuthContext);
+  const { myKey,url } = useContext(AuthContext);
   const [firstName, setFirstName] = useState(userData.first_name);
   const [lastName, setLastName] = useState(userData.last_name);
   const [isStaffed, setIsStaffed] = useState(userData.is_staffed);
@@ -48,7 +48,7 @@ export default function PersonalUpdate() {
       });
 
       let reqOptions = {
-        url: `https://esadd26.pythonanywhere.com/api/personal/${userId}/`,
+        url: `${url}api/personal/${userId}/`,
         method: "PUT",
         headers: headersList,
         data: bodyContent,

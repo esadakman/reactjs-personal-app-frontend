@@ -18,8 +18,7 @@ const theme = createTheme();
 
 export default function Register() {
   const navigate = useNavigate();
-  const { createUser } = React.useContext(AuthContext);
-
+  const { createUser} = React.useContext(AuthContext); 
   return (
     <ThemeProvider theme={theme}>
       <Grid
@@ -35,7 +34,7 @@ export default function Register() {
           md={7}
           sx={{
             backgroundImage: "url(https://source.unsplash.com/random)",
-            backgroundRepeat: "no-repeat", 
+            backgroundRepeat: "no-repeat",
             backgroundColor: (t) =>
               t.palette.mode === "light"
                 ? t.palette.grey[50]

@@ -1,4 +1,4 @@
-import * as React from "react";
+// import * as React from "react";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
@@ -17,19 +17,19 @@ import axios from "axios";
 import { AuthContext } from "../contexts/AuthContext";
 import { toastErrorNotify, toastSuccessNotify } from "../helper/ToastNotify";
 import { Container } from "@mui/material";
+import { useContext, useState } from "react";
 
 export default function PersonalCreate() {
   const navigate = useNavigate();
-  const { myKey } = React.useContext(AuthContext);
+
+  const { myKey, url } = useContext(AuthContext);
   const location = useLocation();
   const { departmentId } = location.state;
-  const [firstName, setFirstName] = React.useState("");
-  const [lastName, setLastName] = React.useState("");
-  // const [isStaffed, setIsStaffed] = React.useState(false);
-  const [title, setTitle] = React.useState("Junior");
-  const [gender, setGender] = React.useState("Male");
-  const [salary, setSalary] = React.useState(1250);
-
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [title, setTitle] = useState("Junior");
+  const [gender, setGender] = useState("Male");
+  const [salary, setSalary] = useState(1250);
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -50,12 +50,12 @@ export default function PersonalCreate() {
       });
 
       let reqOptions = {
-        url: "https://esadd26.pythonanywhere.com/api/personal/",
+        url: `${url}api/personal/`,
         method: "POST",
         headers: headersList,
         data: bodyContent,
       };
-      // console.log(reqOptions);
+      // console.log(reqOptions.url);
 
       let response = await axios.request(reqOptions);
       if (response.status === 201) {
@@ -200,7 +200,7 @@ export default function PersonalCreate() {
                   variant="contained"
                   sx={{
                     marginLeft: { xs: "0", md: "2rem" },
-                    marginTop: { xs: "1rem", md: "0" }, 
+                    marginTop: { xs: "1rem", md: "0" },
                     width: { xs: "100%", md: "45%" },
                   }}
                   onClick={() => navigate(-1)}

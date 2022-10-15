@@ -11,7 +11,7 @@ import axios from "axios";
 import { AuthContext } from "../contexts/AuthContext";
 import { toastErrorNotify } from "../helper/ToastNotify";
 import { Container } from "@mui/material";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState, } from "react";
 
 function createData(index, name, personal_count) {
   // console.log(index, name, personal_count);
@@ -19,13 +19,13 @@ function createData(index, name, personal_count) {
 }
 
 export default function DepartmentTable() {
-  const { myKey } = useContext(AuthContext);
+  const { myKey,url } = useContext(AuthContext);
   const navigate = useNavigate();
-  const [data, setData] = useState();
+  const [data, setData] = useState(); 
 
   const getDepartments = async (str) => {
     try {
-      const res = await axios.get(`https://esadd26.pythonanywhere.com/api/`, {
+      const res = await axios.get(`${url}api/`, {
         headers: { Authorization: `Token ${myKey}` },
       });
       const rows = res.data.map((item, index) =>
@@ -42,7 +42,7 @@ export default function DepartmentTable() {
       getDepartments();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [myKey]);
+  }, []);
 
   const handleClick = (userId) => {
     navigate(`/detail/${userId}`);
