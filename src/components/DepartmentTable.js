@@ -10,6 +10,8 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { AuthContext } from "../contexts/AuthContext";
 import { toastErrorNotify } from "../helper/ToastNotify";
+import { Container } from "@mui/material";
+import { useContext, useEffect, useState } from "react";
 
 function createData(index, name, personal_count) {
   console.log(index, name, personal_count);
@@ -17,9 +19,9 @@ function createData(index, name, personal_count) {
 }
 
 export default function DepartmentTable() {
-  const { myKey } = React.useContext(AuthContext);
+  const { myKey } = useContext(AuthContext);
   const navigate = useNavigate();
-  const [data, setData] = React.useState();
+  const [data, setData] = useState();
 
   const getDepartments = async (str) => {
     try {
@@ -35,7 +37,7 @@ export default function DepartmentTable() {
       toastErrorNotify(error.message);
     }
   };
-  React.useEffect(() => {
+  useEffect(() => {
     if (myKey) {
       getDepartments();
     }
@@ -47,7 +49,7 @@ export default function DepartmentTable() {
   };
 
   return (
-    <div style={{ margin: "1rem", display: "flex", justifyContent: "center" }}>
+    <Container>
       <TableContainer
         component={Paper}
         sx={{ boxShadow: 5, borderRadius: "1rem", padding: "1rem" }}
@@ -83,6 +85,6 @@ export default function DepartmentTable() {
           </TableBody>
         </Table>
       </TableContainer>
-    </div>
+    </Container>
   );
 }

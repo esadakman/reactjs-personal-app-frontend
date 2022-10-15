@@ -13,6 +13,8 @@ import axios from "axios";
 import { AuthContext } from "../contexts/AuthContext";
 import { toastErrorNotify, toastSuccessNotify } from "../helper/ToastNotify";
 import { Button, Container, Typography } from "@mui/material";
+import { useContext, useEffect, useState } from "react";
+import PersonalUpdate from "./PersonalUpdate";
 
 function createData(
   index,
@@ -25,7 +27,7 @@ function createData(
   is_staffed,
   id
 ) {
-  console.log(index, days, first_name, last_name, gender, salary);
+  // console.log(index, days, first_name, last_name, gender, salary);
   return {
     index,
     days,
@@ -40,12 +42,11 @@ function createData(
 }
 
 export default function DeparmentDetail() {
-  const { str } = useParams();
-  console.log(str)
-  const { myKey } = React.useContext(AuthContext);
+  const { str } = useParams(); 
+  const { myKey } = useContext(AuthContext);
   const isStaff = sessionStorage.getItem("is_staff") || false;
-  const [data, setData] = React.useState();
-  const [departmentId, setId] = React.useState();
+  const [data, setData] = useState(); 
+  const [departmentId, setId] = useState();
   const navigate = useNavigate();
   const getDepartments = async () => {
     try {
@@ -53,7 +54,7 @@ export default function DeparmentDetail() {
         `http://127.0.0.1:8000/api/department/${str}/`,
         { headers: { Authorization: `Token ${myKey}` } }
       );
-      console.log(res);
+      // console.log(res);
       const rows = res.data[0].departments.map((item, index) =>
         createData(
           index + 1,
@@ -70,13 +71,14 @@ export default function DeparmentDetail() {
       setData(rows);
       setId(res.data[0].id);
     } catch (error) {
-      // toastErrorNotify(error.message)
+      toastErrorNotify(error.message)
     }
   };
   React.useEffect(() => {
     getDepartments();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+  // ! handleDelete
 
   const handleDelete = async (id) => {
     try {
@@ -85,10 +87,10 @@ export default function DeparmentDetail() {
         { headers: { Authorization: `Token ${myKey}` } }
       );
       console.log(res);
-      toastSuccessNotify("Personel başarıyla silindi!");
+      toastSuccessNotify("Personal succesfully delete");
       getDepartments();
     } catch (error) {
-      toastErrorNotify("Bu işlemi yapabilmen için daha çok çalışman lazım");
+      toastErrorNotify("You need access to perform this action");
     }
   };
   const handleEdit = () => {};
@@ -96,13 +98,14 @@ export default function DeparmentDetail() {
     navigate("/create-personal", { state: { departmentId } });
   };
 
-  const handleUpdate = (deparment) => {
-    navigate(`/update-personal/${deparment}`);
-    console.log(deparment);
+  // ! handleUpdate
+  const handleUpdate = (userData) => {
+    navigate(`/update-personal/${userData.id}`, { state: { userData } });
+    // console.log(userData);
   };
 
   return (
-    <Container maxWidth="md">
+    <Container maxWidth="lg">
       <Typography
         component="h1"
         variant="h4"
@@ -165,16 +168,17 @@ export default function DeparmentDetail() {
                         <Button
                           color="primary"
                           sx={{ minWidth: "0" }}
-                          onClick={() => handleUpdate(row.id)}
+                          onClick={() => handleUpdate(row)}
                         >
                           <EditIcon />
+                          {/* <PersonalUpdate info={row}/> */}
                         </Button>
                       </TableCell>
                       <TableCell align="center" sx={{ cursor: "pointer" }}>
                         <Button
                           color="error"
                           sx={{ minWidth: "0" }}
-                          onClick={() => handleClick(row.name)}
+                          onClick={() => handleDelete(row.id)}
                         >
                           <DeleteIcon />
                         </Button>

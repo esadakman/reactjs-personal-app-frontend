@@ -54,10 +54,11 @@ export default function PersonalCreate() {
       headers: headersList,
       data: bodyContent,
     };
+    console.log(reqOptions);
 
     let response = await axios.request(reqOptions);
     if (response.status === 201) {
-      toastSuccessNotify("Personel başarıyla kaydedildi!");
+      toastSuccessNotify("Personal succesfully created!");
       navigate(-1);
     }
     console.log(response.data);
@@ -77,7 +78,7 @@ export default function PersonalCreate() {
           boxShadow: 5,
         }}
       >
-        PersonalCreate
+        Personal Create
       </Typography>
 
       <Grid

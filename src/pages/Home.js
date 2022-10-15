@@ -1,12 +1,10 @@
-import { Typography } from "@mui/material";
+import { Container, Typography } from "@mui/material";
 import React from "react";
 import DeparmentTable from "../components/DepartmentTable";
 
 const Home = () => {
   return (
-    <div
-      style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
-    >
+    <Container>
       <Typography
         component="h1"
         variant="h4"
@@ -23,7 +21,7 @@ const Home = () => {
         Welcome to Personal List App
       </Typography>
       <DeparmentTable />
-    </div>
+    </Container>
   );
 };
 

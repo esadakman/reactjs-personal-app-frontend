@@ -16,66 +16,49 @@ import axios from "axios";
 import { AuthContext } from "../contexts/AuthContext";
 import { toastSuccessNotify } from "../helper/ToastNotify";
 import { Container } from "@mui/material";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 
 export default function PersonalUpdate() {
-  const { userId } = useParams();
-  console.log(userId);
   const navigate = useNavigate();
-  const { myKey } = useContext(AuthContext);
   const location = useLocation();
-  //   const { departmentId } = location.state;
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [isStaffed, setIsStaffed] = useState(false);
-  const [title, setTitle] = useState("Junior");
-  const [gender, setGender] = useState("Male");
-  const [salary, setSalary] = useState(1250);
+  const { userData } = location.state;  
+  const { userId } = useParams();
+  const { myKey } = useContext(AuthContext);
+  const [firstName, setFirstName] = useState(userData.first_name);
+  const [lastName, setLastName] = useState(userData.last_name);
+  const [isStaffed, setIsStaffed] = useState(userData.is_staffed);
+  const [title, setTitle] = useState(userData.title);
+  const [gender, setGender] = useState(userData.gender);
+  const [salary, setSalary] = useState(userData.salary);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // let headersList = {
-    //   Accept: "*/*",
-    //   Authorization: `Token ${myKey}`,
-    //   "Content-Type": "application/json",
-    // };
+    // getUserDetail();
     let headersList = {
       Accept: "*/*",
-      Authorization: "Token 902fa0fbbecd501d1c7ba3efd570362b40388797",
+      Authorization: await `Token ${myKey}`,
     };
+    let bodyContent = JSON.stringify({
+      first_name: firstName,
+      last_name: lastName,
+      is_staffed: isStaffed,
+      title: title,
+      gender: gender,
+      salary: salary,
+    });
 
     let reqOptions = {
-      url: "http://127.0.0.1:8000/api/personal/8/",
-      method: "GET",
+      url: `http://127.0.0.1:8000/api/personal/${userId}/`,
+      method: "PUT",
       headers: headersList,
+      data: bodyContent,
     };
-
+    console.log(reqOptions);
     let response = await axios.request(reqOptions);
-    console.log(response.data);
-
-    // let bodyContent = JSON.stringify({
-    //   first_name: firstName,
-    //   last_name: lastName,
-    //   is_staffed: isStaffed,
-    //   title: title,
-    //   gender: gender,
-    //   salary: salary,
-    //   department: departmentId,
-    // });
-
-    // let reqOptions = {
-    //   url: "http://127.0.0.1:8000/api/personal/",
-    //   method: "POST",
-    //   headers: headersList,
-    //   data: bodyContent,
-    // };
-
-    // let response = await axios.request(reqOptions);
-    // if (response.status === 201) {
-    //   toastSuccessNotify("Personel başarıyla kaydedildi!");
-    //   navigate(-1);
-    // }
-    // console.log(response.data);
+    if (response.status === 201) {
+      toastSuccessNotify("Personal succesfully updated!");
+      navigate(-1);
+    }
   };
 
   return (
@@ -92,7 +75,7 @@ export default function PersonalUpdate() {
           boxShadow: 5,
         }}
       >
-        PersonalUpdate
+        Personal Update
       </Typography>
 
       <Grid
@@ -118,7 +101,7 @@ export default function PersonalUpdate() {
                 <InputLabel>Title</InputLabel>
                 <Select
                   id="title-select"
-                  value={title}
+                  value={title || ""}
                   variant="outlined"
                   type="text"
                   onChange={(e) => setTitle(e.target.value)}
@@ -138,7 +121,7 @@ export default function PersonalUpdate() {
                 id="firstName"
                 type="text"
                 variant="outlined"
-                value={firstName}
+                value={firstName || ""}
                 onChange={(e) => setFirstName(e.target.value)}
                 required
               />
@@ -149,7 +132,7 @@ export default function PersonalUpdate() {
                 id="lastName"
                 type="text"
                 variant="outlined"
-                value={lastName}
+                value={lastName || ""}
                 onChange={(e) => setLastName(e.target.value)}
                 required
               />
@@ -165,7 +148,7 @@ export default function PersonalUpdate() {
                 <Select
                   name="gender"
                   id="gender-select"
-                  value={gender}
+                  value={gender || ""}
                   onChange={(e) => setGender(e.target.value)}
                   required
                 >
@@ -183,7 +166,7 @@ export default function PersonalUpdate() {
                 type="number"
                 variant="outlined"
                 InputProps={{ inputProps: { min: 1250 } }}
-                value={salary}
+                value={salary || ""}
                 onChange={(e) => setSalary(e.target.value)}
                 required
               />
