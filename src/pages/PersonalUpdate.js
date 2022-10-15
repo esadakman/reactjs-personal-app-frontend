@@ -9,19 +9,17 @@ import { useLocation, useNavigate, useParams } from "react-router-dom";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
-import FormControl from "@mui/material/FormControl";
-import Checkbox from "@mui/material/Checkbox";
-import FormControlLabel from "@mui/material/FormControlLabel";
+import FormControl from "@mui/material/FormControl"; 
 import axios from "axios";
 import { AuthContext } from "../contexts/AuthContext";
-import { toastSuccessNotify } from "../helper/ToastNotify";
+import { toastErrorNotify, toastSuccessNotify } from "../helper/ToastNotify";
 import { Container } from "@mui/material";
-import { useContext, useEffect, useState } from "react";
+import { useContext,   useState } from "react";
 
 export default function PersonalUpdate() {
   const navigate = useNavigate();
   const location = useLocation();
-  const { userData } = location.state;  
+  const { userData } = location.state;
   const { userId } = useParams();
   const { myKey } = useContext(AuthContext);
   const [firstName, setFirstName] = useState(userData.first_name);
@@ -34,33 +32,39 @@ export default function PersonalUpdate() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     // getUserDetail();
-    let headersList = {
-      Accept: "*/*",
-      Authorization: await `Token ${myKey}`,
-    };
-    let bodyContent = JSON.stringify({
-      first_name: firstName,
-      last_name: lastName,
-      is_staffed: isStaffed,
-      title: title,
-      gender: gender,
-      salary: salary,
-    });
-
-    let reqOptions = {
-      url: `http://127.0.0.1:8000/api/personal/${userId}/`,
-      method: "PUT",
-      headers: headersList,
-      data: bodyContent,
-    };
-    console.log(reqOptions);
-    let response = await axios.request(reqOptions);
-    if (response.status === 201) {
-      toastSuccessNotify("Personal succesfully updated!");
-      navigate(-1);
+    try {
+      let headersList = {
+        Accept: "*/*",
+        Authorization: `Token ${myKey}`,
+        "Content-Type": "application/json",
+      };
+      let bodyContent = JSON.stringify({
+        first_name: firstName,
+        last_name: lastName,
+        is_staffed: isStaffed,
+        title: title,
+        gender: gender,
+        salary: salary,
+      });
+  
+      let reqOptions = {
+        url: `http://127.0.0.1:8000/api/personal/${userId}/`,
+        method: "PUT",
+        headers: headersList,
+        data: bodyContent,
+      };
+      console.log(reqOptions);
+  
+      let response = await axios.request(reqOptions);
+      if (response.status === 200) {
+        toastSuccessNotify("Personal succesfully updated!");
+        navigate(-1);
+      }
+    } catch (error) {
+      toastErrorNotify("You need access to perform this action");
     }
   };
-
+  console.log(isStaffed);
   return (
     <Container maxWidth="sm">
       <Typography
@@ -104,6 +108,7 @@ export default function PersonalUpdate() {
                   value={title || ""}
                   variant="outlined"
                   type="text"
+                  label="Title"
                   onChange={(e) => setTitle(e.target.value)}
                   required
                 >
@@ -136,17 +141,32 @@ export default function PersonalUpdate() {
                 onChange={(e) => setLastName(e.target.value)}
                 required
               />
-              <FormControlLabel
-                // fullWidth
+              {/* <FormControlLabel
                 name="is_staff"
+                // control={<Checkbox checked={isStaffed} />}
                 control={<Checkbox />}
+                // checked={isStaffed}
                 onChange={(e) => setIsStaffed(e.target.value)}
                 label="Is Staffed?"
-              />
+              /> */}
+              <FormControl fullWidth>
+                <InputLabel id="is_staff-select-label">Is Staff</InputLabel>
+                <Select
+                  label="isStaff"
+                  id="isStaff-select"
+                  value={isStaffed}
+                  onChange={(e) => setIsStaffed(e.target.value)}
+                  required
+                >
+                  <MenuItem value={"true"}>True</MenuItem>
+                  <MenuItem value={"false"}>False</MenuItem>
+                </Select>
+              </FormControl>
+
               <FormControl fullWidth>
                 <InputLabel id="gender-select-label">Gender</InputLabel>
                 <Select
-                  name="gender"
+                  label="gender"
                   id="gender-select"
                   value={gender || ""}
                   onChange={(e) => setGender(e.target.value)}

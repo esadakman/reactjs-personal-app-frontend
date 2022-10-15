@@ -13,8 +13,7 @@ import axios from "axios";
 import { AuthContext } from "../contexts/AuthContext";
 import { toastErrorNotify, toastSuccessNotify } from "../helper/ToastNotify";
 import { Button, Container, Typography } from "@mui/material";
-import { useContext, useEffect, useState } from "react";
-import PersonalUpdate from "./PersonalUpdate";
+import { useContext, useState } from "react"; 
 
 function createData(
   index,

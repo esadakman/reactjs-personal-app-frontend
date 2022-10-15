@@ -14,7 +14,7 @@ import { Container } from "@mui/material";
 import { useContext, useEffect, useState } from "react";
 
 function createData(index, name, personal_count) {
-  console.log(index, name, personal_count);
+  // console.log(index, name, personal_count);
   return { index, name, personal_count };
 }
 
@@ -69,7 +69,8 @@ export default function DepartmentTable() {
               data?.map((row) => (
                 <TableRow
                   key={row.name}
-                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                  sx={{ "&:last-child td, &:last-child th": { border: 0 } , }}
+                  color='primary'
                 >
                   <TableCell align="center">{row.index}</TableCell>
                   <TableCell

@@ -4,7 +4,7 @@ import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
-import Typography from "@mui/material/Typography"; 
+import Typography from "@mui/material/Typography";
 import { useLocation, useNavigate } from "react-router-dom";
 // import { PersonalContext } from '../contexts/PersonalContext';
 import InputLabel from "@mui/material/InputLabel";
@@ -15,7 +15,7 @@ import Checkbox from "@mui/material/Checkbox";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import axios from "axios";
 import { AuthContext } from "../contexts/AuthContext";
-import { toastSuccessNotify } from "../helper/ToastNotify";
+import { toastErrorNotify,toastSuccessNotify } from "../helper/ToastNotify";
 import { Container } from "@mui/material";
 
 export default function PersonalCreate() {
@@ -32,36 +32,40 @@ export default function PersonalCreate() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    let headersList = {
-      Accept: "*/*",
-      Authorization: `Token ${myKey}`,
-      "Content-Type": "application/json",
-    };
+    try {
+      let headersList = {
+        Accept: "*/*",
+        Authorization: `Token ${myKey}`,
+        "Content-Type": "application/json",
+      };
 
-    let bodyContent = JSON.stringify({
-      first_name: firstName,
-      last_name: lastName,
-      is_staffed: isStaffed,
-      title: title,
-      gender: gender,
-      salary: salary,
-      department: departmentId,
-    });
+      let bodyContent = JSON.stringify({
+        first_name: firstName,
+        last_name: lastName,
+        is_staffed: isStaffed,
+        title: title,
+        gender: gender,
+        salary: salary,
+        department: departmentId,
+      });
 
-    let reqOptions = {
-      url: "http://127.0.0.1:8000/api/personal/",
-      method: "POST",
-      headers: headersList,
-      data: bodyContent,
-    };
-    console.log(reqOptions);
+      let reqOptions = {
+        url: "http://127.0.0.1:8000/api/personal/",
+        method: "POST",
+        headers: headersList,
+        data: bodyContent,
+      };
+      console.log(reqOptions);
 
-    let response = await axios.request(reqOptions);
-    if (response.status === 201) {
-      toastSuccessNotify("Personal succesfully created!");
-      navigate(-1);
+      let response = await axios.request(reqOptions);
+      if (response.status === 201) {
+        toastSuccessNotify("Personal succesfully created!");
+        navigate(-1);
+      }
+      console.log(response.data);
+    } catch (error) {
+      toastErrorNotify("You need access to perform this action");
     }
-    console.log(response.data);
   };
 
   return (
@@ -109,6 +113,7 @@ export default function PersonalCreate() {
                   type="text"
                   onChange={(e) => setTitle(e.target.value)}
                   required
+                  label="Title"
                 >
                   <MenuItem value={"Team Lead"}>Team LEAD</MenuItem>
                   <MenuItem value={"Mid Lead"}>Mid LEAD</MenuItem>
@@ -149,7 +154,7 @@ export default function PersonalCreate() {
               <FormControl fullWidth>
                 <InputLabel id="gender-select-label">Gender</InputLabel>
                 <Select
-                  name="gender"
+                  label="gender"
                   id="gender-select"
                   value={gender}
                   onChange={(e) => setGender(e.target.value)}
