@@ -35,16 +35,15 @@ export default function NavBar() {
     <Box sx={{ marginBottom: "0px" }}>
       <AppBar
         position="static"
-        style={{ cursor: "pointer" }}
-        // sx={{ backgroundColor: "tomato" }}
+        style={{ background: "#050f24", height: "4rem" }}
       >
         <Toolbar>
           <Typography
             variant="h6"
             color="inherit"
-            sx={{ flexGrow: 3, textAlign: "left" }}
+            sx={{ flexGrow: 3, textAlign: "left",cursor: "pointer", }}
             style={{ marginLeft: "0px" }}
-            onClick={() => navigate("/home")}
+            onClick={() => navigate("/home")} 
           >
             Personal List App
           </Typography>
@@ -83,7 +82,7 @@ export default function NavBar() {
                 height: "40px",
                 marginLeft: "2px",
                 "&:hover": {
-                  backgroundColor: "black",
+                  backgroundColor: "gray",
                   color: "white",
                   opacity: [0.9, 0.8, 0.7],
                 },

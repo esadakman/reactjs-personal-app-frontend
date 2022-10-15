@@ -19,11 +19,9 @@ function App() {
         marginTop: 0,
       }}
     >
-      <AuthContextProvider>
-        {/* <PersonalContextProvider> */}
+      <AuthContextProvider> 
           <AppRouter />
-          <ToastContainer />
-        {/* </PersonalContextProvider> */}
+          <ToastContainer /> 
       </AuthContextProvider>
     </div>
   );

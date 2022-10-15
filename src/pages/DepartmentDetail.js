@@ -13,7 +13,7 @@ import axios from "axios";
 import { AuthContext } from "../contexts/AuthContext";
 import { toastErrorNotify, toastSuccessNotify } from "../helper/ToastNotify";
 import { Button, Container, Typography } from "@mui/material";
-import { useContext, useState } from "react"; 
+import { useContext, useState } from "react";
 
 function createData(
   index,
@@ -41,16 +41,16 @@ function createData(
 }
 
 export default function DeparmentDetail() {
-  const { str } = useParams(); 
+  const { str } = useParams();
   const { myKey } = useContext(AuthContext);
   const isStaff = sessionStorage.getItem("is_staff") || false;
-  const [data, setData] = useState(); 
+  const [data, setData] = useState();
   const [departmentId, setId] = useState();
   const navigate = useNavigate();
   const getDepartments = async () => {
     try {
       const res = await axios.get(
-        `http://127.0.0.1:8000/api/department/${str}/`,
+        `https://esadd26.pythonanywhere.com/api/department/${str}/`,
         { headers: { Authorization: `Token ${myKey}` } }
       );
       // console.log(res);
@@ -70,7 +70,7 @@ export default function DeparmentDetail() {
       setData(rows);
       setId(res.data[0].id);
     } catch (error) {
-      toastErrorNotify(error.message)
+      toastErrorNotify(error.message);
     }
   };
   React.useEffect(() => {
@@ -82,7 +82,7 @@ export default function DeparmentDetail() {
   const handleDelete = async (id) => {
     try {
       const res = await axios.delete(
-        `http://127.0.0.1:8000/api/personal/${id}`,
+        `https://esadd26.pythonanywhere.com/api/personal/${id}`,
         { headers: { Authorization: `Token ${myKey}` } }
       );
       console.log(res);
@@ -124,8 +124,8 @@ export default function DeparmentDetail() {
         <Table aria-label="simple table">
           <TableHead>
             <TableRow>
-              <TableCell align="center">N.</TableCell>
-              <TableCell align="center">Did Joined?</TableCell>
+              <TableCell align="center">No</TableCell>
+              <TableCell align="center">Join Date</TableCell>
               <TableCell align="center">Title</TableCell>
               <TableCell align="center">First Name</TableCell>
               <TableCell align="center">Last Name</TableCell>
@@ -189,12 +189,21 @@ export default function DeparmentDetail() {
           </TableBody>
         </Table>
       </TableContainer>
-
-      {isStaff !== "false" && (
-        <Button onClick={handleClick} variant="contained" sx={{ mt: 3 }}>
-          Add Personal
+      <div style={{display:'flex',justifyContent:'space-between',marginTop:'1rem' }}>
+        {isStaff !== "false" && (
+          <Button onClick={handleClick} variant="contained" >
+            Add Personal
+          </Button>
+        )}
+        <Button
+          style={{ width: 100 }}
+          variant="contained"
+          onClick={() => navigate("/home")}
+          color="error"
+        >
+          Back
         </Button>
-      )}
+      </div>
     </Container>
   );
 }

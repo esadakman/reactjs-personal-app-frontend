@@ -2,7 +2,7 @@ import * as React from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
-import TextField from "@mui/material/TextField"; 
+import TextField from "@mui/material/TextField";
 import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
@@ -35,7 +35,7 @@ export default function Register() {
           md={7}
           sx={{
             backgroundImage: "url(https://source.unsplash.com/random)",
-            backgroundRepeat: "no-repeat",
+            backgroundRepeat: "no-repeat", 
             backgroundColor: (t) =>
               t.palette.mode === "light"
                 ? t.palette.grey[50]
@@ -94,7 +94,19 @@ export default function Register() {
                     email: Yup.string()
                       .email("Email is invalid")
                       .required("Email is required"),
-                    password: Yup.string().min(8,"Password should be at least 8 characters").max(12).matches(/\d+/,"Password should contain numbers").matches(/[a-z]+/,"Password should contain at least one lowercase letter.").matches(/[A-Z]+/,"Password should contain at least one uppercase letter").required("Şifre gereklidir")
+                    password: Yup.string()
+                      .min(8, "Password should be at least 8 characters")
+                      .max(16)
+                      .matches(/\d+/, "Password should contain numbers")
+                      .matches(
+                        /[a-z]+/,
+                        "Password should contain at least one lowercase letter."
+                      )
+                      .matches(
+                        /[A-Z]+/,
+                        "Password should contain at least one uppercase letter"
+                      )
+                      .required("Şifre gereklidir"),
                   })}
                   onSubmit={(values, actions) => {
                     actions.resetForm();

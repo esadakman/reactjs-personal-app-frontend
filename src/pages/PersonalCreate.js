@@ -50,19 +50,19 @@ export default function PersonalCreate() {
       });
 
       let reqOptions = {
-        url: "http://127.0.0.1:8000/api/personal/",
+        url: "https://esadd26.pythonanywhere.com/api/personal/",
         method: "POST",
         headers: headersList,
         data: bodyContent,
       };
-      console.log(reqOptions);
+      // console.log(reqOptions);
 
       let response = await axios.request(reqOptions);
       if (response.status === 201) {
         toastSuccessNotify("Personal succesfully created!");
         navigate(-1);
       }
-      console.log(response.data);
+      // console.log(response.data);
     } catch (error) {
       if (error.response.request.status === 401) {
         toastErrorNotify("You need access to perform this action");
@@ -184,9 +184,30 @@ export default function PersonalCreate() {
               />
               {/* //!================================================ */}
 
-              <Button type="submit" variant="contained" size="large">
-                Create Personal
-              </Button>
+              <Container>
+                <Button
+                  type="submit"
+                  variant="contained"
+                  size="large"
+                  fullWidth
+                  sx={{ width: { xs: "100%", md: "47%" } }}
+                >
+                  Create Personal
+                </Button>
+                <Button
+                  size="large"
+                  color="error"
+                  variant="contained"
+                  sx={{
+                    marginLeft: { xs: "0", md: "2rem" },
+                    marginTop: { xs: "1rem", md: "0" }, 
+                    width: { xs: "100%", md: "45%" },
+                  }}
+                  onClick={() => navigate(-1)}
+                >
+                  Go Back
+                </Button>
+              </Container>
             </Box>
           </Box>
         </Container>

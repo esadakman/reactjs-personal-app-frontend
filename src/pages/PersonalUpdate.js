@@ -48,20 +48,18 @@ export default function PersonalUpdate() {
       });
 
       let reqOptions = {
-        url: `http://127.0.0.1:8000/api/personal/${userId}/`,
+        url: `https://esadd26.pythonanywhere.com/api/personal/${userId}/`,
         method: "PUT",
         headers: headersList,
         data: bodyContent,
       };
-      console.log(reqOptions);
+      // console.log(reqOptions);
 
       let response = await axios.request(reqOptions);
       if (response.status === 200) {
         toastSuccessNotify("Personal succesfully updated!");
         navigate(-1);
       }
-      toastSuccessNotify("Personal succesfully updated!");
-      navigate(-1);
     } catch (error) {
       if (error.response.request.status === 401) {
         toastErrorNotify("You need access to perform this action");
@@ -94,6 +92,7 @@ export default function PersonalUpdate() {
           borderRadius: "1rem",
           boxShadow: 5,
           p: 2,
+          my:3 
         }}
       >
         <Container component="main">
@@ -196,11 +195,31 @@ export default function PersonalUpdate() {
                 required
               />
               {/* //!================================================ */}
-
-              <Button type="submit" variant="contained" size="large">
-                Create Personal
-              </Button>
-            </Box>
+              {/* <div style={{display:'flex',justifyContent:'center'}}> */}
+              <Container >
+                <Button
+                  type="submit"
+                  variant="contained"
+                  size="large"
+                  sx={{ width: { xs: "100%", md: "45%" } }}
+                >
+                  Submit Change
+                </Button>
+                <Button
+                  size="large"
+                  color="error"
+                  variant="contained"
+                  sx={{
+                    marginLeft: { xs: "0", md: "2rem" },
+                    marginTop: { xs: "1rem", md: "0" }, 
+                    width: { xs: "100%", md: "45%" },
+                  }} 
+                  onClick={() => navigate(-1)}
+                >
+                  Cancel Change
+                </Button>
+              </Container>
+            </Box> 
           </Box>
         </Container>
       </Grid>
