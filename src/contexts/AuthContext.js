@@ -5,7 +5,7 @@ import { toastSuccessNotify,toastErrorNotify } from "../helper/ToastNotify";
 export const AuthContext = createContext();
 
 // const url = "http://127.0.0.1:8000/";
-const url = "http://esadd26.pythonanywhere.com/"
+const url = "https://esadd26.pythonanywhere.com/"
 
 const AuthContextProvider = (props) => {
   const [currentUser, setCurrentUser] = useState(
@@ -79,7 +79,7 @@ const AuthContextProvider = (props) => {
     try {
       var config = {
         method: "post",
-        url: "http://esadd26.pythonanywhere.com/users/auth/logouts/",
+        url: "https://esadd26.pythonanywhere.com/users/auth/logouts/",
         headers: {
           Authorization: `Token ${myKey}`,
         },
