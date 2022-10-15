@@ -1,11 +1,11 @@
 import axios from "axios";
 import { createContext,  useState } from "react";
-import { toastSuccessNotify } from "../helper/ToastNotify";
+import { toastSuccessNotify,toastErrorNotify } from "../helper/ToastNotify";
 
 export const AuthContext = createContext();
 
-const url = "http://127.0.0.1:8000/";
-// const url = "http://esadd26.pythonanywhere.com/"
+// const url = "http://127.0.0.1:8000/";
+const url = "http://esadd26.pythonanywhere.com/"
 
 const AuthContextProvider = (props) => {
   const [currentUser, setCurrentUser] = useState(
@@ -51,7 +51,7 @@ const AuthContextProvider = (props) => {
 
   const signIn = async (email, password, userName, navigate) => {
     try {
-      console.log(email);
+      // console.log(email);
       const res = await axios.post(`${url}users/auth/login/`, {
         email: email,
         username: userName,
@@ -71,6 +71,7 @@ const AuthContextProvider = (props) => {
       }
     } catch (error) {
       console.log(error);
+      toastErrorNotify("Please check your informations");
     }
   };
 
@@ -78,7 +79,7 @@ const AuthContextProvider = (props) => {
     try {
       var config = {
         method: "post",
-        url: "http://127.0.0.1:8000/users/auth/logouts/",
+        url: "http://esadd26.pythonanywhere.com/users/auth/logouts/",
         headers: {
           Authorization: `Token ${myKey}`,
         },
@@ -92,7 +93,9 @@ const AuthContextProvider = (props) => {
         toastSuccessNotify("User log out successfully.");
         navigate("/");
       }
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   let value = {
