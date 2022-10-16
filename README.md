@@ -4,13 +4,14 @@
 
 - This is the frontend side of my personal list app project.
 - I used django rest framework for backend.
-  ##### You can see my backend project from [here](https://github.com/esadakman/django-personal-app-backend) 👈
+  ##### You can see the backend side of this project from[here](https://github.com/esadakman/django-personal-app-backend) 👈
 
 ## Description
 
 - The welcome page will be the login page and the user will not be able to access other pages without login
 - Company personnel who have logged into the system will be able to see the company's departments on the home page and the personnel working under that section in detail.
-- There will be update delete and add personal buttons for the personnel who are staff. And these personnel will be able to add new personnel to the list, update and delete them.
+- There will be update delete and add personal buttons for the personnel who are staff. And these personnel will be able to add new personnel to the list and update them.
+- Only superusers will have the authority to delete staff.
 - For the register page, we used the formik-yup library in accordance with our backend.
 - When the user logs in, we will send the token information, username and is_staff values to sessionStorage.
 - I used the window.btoa() and window.atob() methods while assigning and withdrawing the token to the storage.
