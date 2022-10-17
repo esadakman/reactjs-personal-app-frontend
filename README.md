@@ -4,7 +4,7 @@
 
 - This is the frontend side of my personal list app project.
 - I used django rest framework for backend.
-  ##### You can see the backend side of this project from[here](https://github.com/esadakman/django-personal-app-backend) 👈
+  ##### You can see the backend side of this project from [here](https://github.com/esadakman/django-personal-app-backend) 👈
 
 ## Description
 
