@@ -45,7 +45,7 @@ export default function NavBar() {
             style={{ marginLeft: "0px" }}
             onClick={() => navigate("/home")} 
           >
-            Personal List App
+            Personnel List App
           </Typography>
           {currentUser ? (
             <Typography

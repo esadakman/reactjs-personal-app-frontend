@@ -18,7 +18,7 @@ const Home = () => {
           boxShadow: 5,
         }}
       >
-        Welcome to Personal List App
+        Welcome to Personnel List App
       </Typography>
       <DeparmentTable />
     </Container>

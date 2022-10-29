@@ -1,16 +1,16 @@
-# Full Stack - Personal List App - Frontend
+# Full Stack - Personnel List App - Frontend
 
 ## Objective
 
 - This is the frontend side of my personal list app project.
 - I used django rest framework for backend.
-  ##### You can see the backend side of this project from [here](https://github.com/esadakman/django-personal-app-backend) 👈
+  ##### You can see the backend side of this project from [here](https://github.com/esadakman/django-personnel-app-backend) 👈
 
 ## Description
 
 - The welcome page will be the login page and the user will not be able to access other pages without login
 - Company personnel who have logged into the system will be able to see the company's departments on the home page and the personnel working under that section in detail.
-- There will be update delete and add personal buttons for the personnel who are staff. And these personnel will be able to add new personnel to the list and update them.
+- There will be update delete and add personnel buttons for the personnel who are staff. And these personnel will be able to add new personnel to the list and update them.
 - Only superusers will have the authority to delete staff.
 - For the register page, we used the formik-yup library in accordance with our backend.
 - When the user logs in, we will send the token information, username and is_staff values to sessionStorage.
@@ -22,7 +22,7 @@
 
 ## Project Link
 
-#### You can reach my project from [here](https://fullstack-personal-app.netlify.app/) 👈
+#### You can reach my project from [here](https://fullstack-personnel-app.netlify.app/) 👈
 
 ## Project Skeleton
 
@@ -73,7 +73,7 @@ SOLUTION
 To run this project;
 
 ```
-$ git clone https://github.com/esadakman/reactjs-personal-app-frontend.git
+$ git clone https://github.com/esadakman/reactjs-personnel-app-frontend.git
 $ cd ./reactjs-personal-app-frontend
 $ npm install / yarn
 $ npm start / yarn start

@@ -86,7 +86,7 @@ export default function DeparmentDetail() {
         { headers: { Authorization: `Token ${myKey}` } }
       );
       console.log(res);
-      toastSuccessNotify("Personal succesfully delete");
+      toastSuccessNotify("Personnel succesfully delete");
       getDepartments();
     } catch (error) {
       toastErrorNotify("You need access to perform this action");
@@ -118,7 +118,7 @@ export default function DeparmentDetail() {
           boxShadow: 5,
         }}
       >
-        {str} Deparments Personal List
+        {str} Deparments Personnel List
       </Typography>
       <TableContainer component={Paper}>
         <Table aria-label="simple table">
@@ -192,7 +192,7 @@ export default function DeparmentDetail() {
       <div style={{display:'flex',justifyContent:'space-between',marginTop:'1rem' }}>
         {isStaff === "true" && (
           <Button onClick={handleClick} variant="contained" >
-            Add Personal
+            Add Personnel
           </Button>
         )}
         <Button

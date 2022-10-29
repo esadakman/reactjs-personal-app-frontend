@@ -59,7 +59,7 @@ export default function PersonalCreate() {
 
       let response = await axios.request(reqOptions);
       if (response.status === 201) {
-        toastSuccessNotify("Personal succesfully created!");
+        toastSuccessNotify("Personnel succesfully created!");
         navigate(-1);
       }
       // console.log(response.data);
@@ -86,7 +86,7 @@ export default function PersonalCreate() {
           boxShadow: 5,
         }}
       >
-        Personal Create
+        Personnel Create
       </Typography>
 
       <Grid
@@ -192,7 +192,7 @@ export default function PersonalCreate() {
                   fullWidth
                   sx={{ width: { xs: "100%", md: "47%" } }}
                 >
-                  Create Personal
+                  Create Personnel
                 </Button>
                 <Button
                   size="large"

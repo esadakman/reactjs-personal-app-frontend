@@ -57,7 +57,7 @@ export default function PersonalUpdate() {
 
       let response = await axios.request(reqOptions);
       if (response.status === 200) {
-        toastSuccessNotify("Personal succesfully updated!");
+        toastSuccessNotify("Personnel succesfully updated!");
         navigate(-1);
       }
     } catch (error) {
@@ -82,7 +82,7 @@ export default function PersonalUpdate() {
           boxShadow: 5,
         }}
       >
-        Personal Update
+        Personnel Update
       </Typography>
 
       <Grid
