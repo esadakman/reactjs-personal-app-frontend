@@ -5,7 +5,7 @@
 }
 
 .bgContainer {
-  background-image: url(https://source.unsplash.com/random);
+  background-image: url(https://source.unsplash.com/user/erondu/1600x900);
   background-repeat: "no-repeat";
   /* background-color: (t)=> t.palette.mode==="light" ? t.palette.grey[50]: t.palette.grey[900]; */
   background-size: "cover";
