@@ -2,7 +2,7 @@ import * as React from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
-import TextField from "@mui/material/TextField"; 
+import TextField from "@mui/material/TextField";
 import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
@@ -31,7 +31,17 @@ export default function Login() {
 
   return (
     <ThemeProvider theme={theme}>
-      <Grid container component="main" sx={{ height: "90.5vh" }}>
+      <Grid
+        container
+        component="main"
+        sx={{
+          height: "90.5vh",
+          "@media (min-width: 1600px)": {
+            height: "93vh",
+            // Additional styles for height above 1600px
+          },
+        }}
+      >
         <CssBaseline />
         <Grid item xs={false} sm={4} md={7} />
         <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>

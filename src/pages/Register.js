@@ -24,7 +24,12 @@ export default function Register() {
       <Grid
         container
         component="main"
-        sx={{ minHeight: { xs: "84.2vh", sm: "83vh" } }}
+        sx={{
+          height: "90.5vh",
+          "@media (min-width: 1600px)": {
+            height: "93vh",
+          },
+        }}
       >
         <CssBaseline />
         <Grid
@@ -184,7 +189,7 @@ export default function Register() {
                         />
                         <TextField
                           fullWidth
-                          label="password"
+                          label="Password"
                           name="password"
                           id="password"
                           type="password"
